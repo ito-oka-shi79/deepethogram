@@ -256,7 +256,7 @@ def load_state_from_dict(model, state_dict):
 
 
 def load_state_dict_from_file(weights_file, distributed: bool = False):
-    state = torch.load(weights_file, map_location="cpu")
+    state = torch.load(weights_file, map_location="cpu", weights_only=False)
 
     is_pure_weights = "epoch" not in list(state.keys())
     # load params

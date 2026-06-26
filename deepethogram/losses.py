@@ -104,7 +104,7 @@ class L2_SP(nn.Module):
         self.beta = beta
 
         assert os.path.isfile(path_to_pretrained_weights)
-        state = torch.load(path_to_pretrained_weights, map_location="cpu")
+        state = torch.load(path_to_pretrained_weights, map_location="cpu", weights_only=False)
 
         pretrained_state = state["state_dict"]
 

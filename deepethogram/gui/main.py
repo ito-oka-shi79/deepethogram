@@ -311,7 +311,7 @@ class MainWindow(QMainWindow):
         self.update()
 
     def generate_flow_train_args(self):
-        args = ["python", "-m", "deepethogram.flow_generator.train", "project.path={}".format(self.cfg.project.path)]
+        args = [sys.executable, "-m", "deepethogram.flow_generator.train", "project.path={}".format(self.cfg.project.path)]
         weights = self.get_selected_models()["flow_generator"]
         if weights is None:
             raise ValueError(pretrained_models_error)
@@ -355,7 +355,7 @@ class MainWindow(QMainWindow):
             self.ui.sequence_train.setEnabled(False)
 
             args = [
-                "python",
+                "sys.executable",
                 "-m",
                 "deepethogram.feature_extractor.train",
                 "project.path={}".format(self.cfg.project.path),
@@ -410,7 +410,7 @@ class MainWindow(QMainWindow):
             raise ValueError("Dont run inference without using a proper feature extractor weights! {}".format(weights))
 
         args = [
-            "python",
+            "sys.executable",
             "-m",
             "deepethogram.feature_extractor.inference",
             "project.path={}".format(self.cfg.project.path),
@@ -466,7 +466,7 @@ class MainWindow(QMainWindow):
             self.ui.featureextractor_train.setEnabled(False)
             self.ui.featureextractor_infer.setEnabled(False)
             self.ui.sequence_infer.setEnabled(False)
-            args = ["python", "-m", "deepethogram.sequence.train", "project.path={}".format(self.cfg.project.path)]
+            args = [sys.executable, "-m", "deepethogram.sequence.train", "project.path={}".format(self.cfg.project.path)]
             weights = self.get_selected_models()["sequence"]
             if weights is not None and os.path.isfile(weights):
                 args += ["reload.weights={}".format(weights)]
@@ -531,7 +531,7 @@ class MainWindow(QMainWindow):
         else:
             raise ValueError("weights do not exist! {}".format(weights))
         args = [
-            "python",
+            "sys.executable",
             "-m",
             "deepethogram.sequence.inference",
             "project.path={}".format(self.cfg.project.path),
