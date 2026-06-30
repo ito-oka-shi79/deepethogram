@@ -355,7 +355,7 @@ class MainWindow(QMainWindow):
             self.ui.sequence_train.setEnabled(False)
 
             args = [
-                "sys.executable",
+                sys.executable,
                 "-m",
                 "deepethogram.feature_extractor.train",
                 "project.path={}".format(self.cfg.project.path),
@@ -410,7 +410,7 @@ class MainWindow(QMainWindow):
             raise ValueError("Dont run inference without using a proper feature extractor weights! {}".format(weights))
 
         args = [
-            "sys.executable",
+            sys.executable,
             "-m",
             "deepethogram.feature_extractor.inference",
             "project.path={}".format(self.cfg.project.path),
@@ -531,7 +531,7 @@ class MainWindow(QMainWindow):
         else:
             raise ValueError("weights do not exist! {}".format(weights))
         args = [
-            "sys.executable",
+            sys.executable,
             "-m",
             "deepethogram.sequence.inference",
             "project.path={}".format(self.cfg.project.path),
