@@ -164,7 +164,7 @@ def predict_single_video(
     fusion: str,
     num_rgb: int,
     mean_by_channels: np.ndarray,
-    device: str = "cuda:0",
+    device: str = "cpu",
     cpu_transform=None,
     gpu_transform=None,
     should_print: bool = False,
@@ -188,7 +188,7 @@ def predict_single_video(
     mean_by_channels : np.ndarray
         Image channel mean for z-scoring
     device : str, optional
-        Device on which to run inference, by default 'cuda:0'. Options: ['cuda:N', 'cpu']
+        Device on which to run inference, by default 'cpu'. Options: ['cuda:N', 'cpu']
     cpu_transform : callable, optional
         CPU transforms to perform, e.g. center cropping / resizing, by default None
     gpu_transform : callable, optional
@@ -317,6 +317,7 @@ def check_if_should_run_inference(h5file: Union[str, os.PathLike], mode: str, la
 
 
 def extract(
+        
     rgbs: list,
     model,
     final_activation: str,
@@ -327,7 +328,7 @@ def extract(
     num_rgb: int,
     latent_name: str,
     class_names: list = ["background"],
-    device: str = "cuda:0",
+    device: str = "cpu",
     cpu_transform=None,
     gpu_transform=None,
     ignore_error=True,
@@ -588,7 +589,7 @@ def feature_extractor_inference(cfg: DictConfig):
         fusion=cfg.feature_extractor.fusion,
         num_rgb=input_images,
         latent_name=latent_name,
-        device=device,
+        device="cpu",
         cpu_transform=cpu_transform,
         gpu_transform=gpu_transform,
         ignore_error=cfg.inference.ignore_error,
