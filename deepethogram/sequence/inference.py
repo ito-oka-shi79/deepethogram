@@ -170,7 +170,7 @@ def extract(
     output_name: str = "tgmj",
     sequence_length: int = 180,
     is_two_stream: bool = True,
-    device: str = "cuda:0",
+    device: str = "cpu",
     ignore_error=True,
     overwrite=False,
     class_names: list = ["background"],
@@ -306,7 +306,7 @@ def sequence_inference(cfg: DictConfig):
         """.format(len(thresholds), len(class_names))
         raise ValueError(error_message)
 
-    device = "cuda:{}".format(cfg.compute.gpu_id)
+    device = "cpu"
     class_names = cfg.project.class_names
     class_names = np.array(class_names)
     extract(
